@@ -34,14 +34,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common64.mk)
 
-PRODUCT_NAME := msm8994
-PRODUCT_DEVICE := msm8994
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := MSM8994 for arm64
+#PRODUCT_NAME := msm8994
+#PRODUCT_DEVICE := msm8994
+#PRODUCT_BRAND := Android
+#PRODUCT_MODEL := MSM8994 for arm64
 
 PRODUCT_BOOT_JARS += tcmiface
 ifneq ($(strip $(QCPATH)),)
-PRODUCT_BOOT_JARS += qcom.fmradio
+#PRODUCT_BOOT_JARS += qcom.fmradio
 PRODUCT_BOOT_JARS += WfdCommon
 #PRODUCT_BOOT_JARS += extendedmediaextractor
 #PRODUCT_BOOT_JARS += security-bridge

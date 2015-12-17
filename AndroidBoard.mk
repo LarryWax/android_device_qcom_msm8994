@@ -18,20 +18,19 @@ endif
 #----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
-ifeq ($(strip $(TARGET_NO_KERNEL)),false)
-ifeq ($(KERNEL_DEFCONFIG),)
-    KERNEL_DEFCONFIG := msm8994_defconfig
-endif
+#ifeq ($(KERNEL_DEFCONFIG),)
+#    KERNEL_DEFCONFIG := msm8994_defconfig
+#endif
 
-include kernel/AndroidKernel.mk
+#include kernel/AndroidKernel.mk
 
-$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-	$(transform-prebuilt-to-target)
-endif
+#$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
+#	$(transform-prebuilt-to-target)
 
 #----------------------------------------------------------------------
 # Copy additional target-specific files
 #----------------------------------------------------------------------
+ifneq ($(strip $(TARGET_USE_CM_RAMDISK)),true)
 include $(CLEAR_VARS)
 LOCAL_MODULE       := vold.fstab
 LOCAL_MODULE_TAGS  := optional
@@ -46,6 +45,7 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := $(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
+endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE       := gpio-keys.kl
@@ -63,6 +63,7 @@ LOCAL_SRC_FILES    := $(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
 include $(BUILD_PREBUILT)
 
+ifneq ($(strip $(TARGET_USE_CM_RAMDISK)),true)
 include $(CLEAR_VARS)
 LOCAL_MODULE       := fstab.qcom
 LOCAL_MODULE_TAGS  := optional
@@ -70,6 +71,7 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := $(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
+endif
 
 ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
 include $(CLEAR_VARS)
@@ -152,4 +154,6 @@ include $(BUILD_PREBUILT)
 #----------------------------------------------------------------------
 # extra images
 #----------------------------------------------------------------------
+ifeq (, $(wildcard vendor/qcom/build/tasks/generate_extra_images.mk))
 include device/qcom/common/generate_extra_images.mk
+endif
