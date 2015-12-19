@@ -18,14 +18,14 @@ endif
 #----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
-#ifeq ($(KERNEL_DEFCONFIG),)
-#    KERNEL_DEFCONFIG := msm8994_defconfig
-#endif
+ifeq ($(KERNEL_DEFCONFIG),)
+   KERNEL_DEFCONFIG := msm8994_defconfig
+endif
 
-#include kernel/AndroidKernel.mk
+include kernel/AndroidKernel.mk
 
-#$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-#	$(transform-prebuilt-to-target)
+$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
+	$(transform-prebuilt-to-target)
 
 #----------------------------------------------------------------------
 # Copy additional target-specific files

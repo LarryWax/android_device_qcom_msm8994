@@ -29,7 +29,7 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 #BOOTLOADER_GCC_VERSION := arm-eabi-4.8
 BOOTLOADER_PLATFORM := msm8994 # use msm8994 LK configuration
 TARGET_NO_KERNEL := false
-#TARGET_KERNEL_APPEND_DTB := true
+TARGET_KERNEL_APPEND_DTB := false
 -include $(QCPATH)/common/msm8994/BoardConfigVendor.mk
 
 # Some framework code requires this to enable BT
@@ -57,21 +57,22 @@ TARGET_USES_OVERLAY := true
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5
+#BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5
 
 BOARD_EGL_CFG := device/qcom/$(TARGET_BOARD_PLATFORM)/egl.cfg
-BOARD_KERNEL_SEPARATED_DT := false
+#BOARD_KERNEL_SEPARATED_DT := false
 
-BOARD_KERNEL_BASE        := 0x00000000
-BOARD_KERNEL_PAGESIZE    := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
+#BOARD_KERNEL_BASE        := 0x00000000
+#BOARD_KERNEL_PAGESIZE    := 2048
+#BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
+#BOARD_RAMDISK_OFFSET     := 0x02000000
 
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := false
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_KERNEL_HEADER_ARCH := arm64
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_USES_UNCOMPRESSED_KERNEL := false
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_HAS_QC_KERNEL_SOURCE := true
 
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
