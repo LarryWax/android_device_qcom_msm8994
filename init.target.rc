@@ -80,6 +80,9 @@ on boot
     write /proc/sys/kernel/sched_boost 1
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
+    #Modify for drv2605 support
+    chmod 0666 /dev/drv2605
+    chown system system /dev/drv2605
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
@@ -115,7 +118,7 @@ service qseecomd /system/bin/qseecomd
    user root
    group root
 
-service perfd /system/vendor/bin/perfd
+service perfd /system/bin/perfd
    class main
    user root
    disabled
@@ -154,13 +157,13 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-recv-passive-client stream 0666 system system
    group root
 
-service security-check1 /sbin/security_boot_check system
-    class core
-    oneshot
+#service security-check1 /sbin/security_boot_check system
+#    class core
+#    oneshot
 
-service security-check2 /sbin/security_boot_check recovery
-    class core
-    oneshot
+#service security-check2 /sbin/security_boot_check recovery
+#    class core
+#    oneshot
 
 service time_daemon /system/bin/time_daemon
    class late_start
@@ -171,11 +174,12 @@ service adsprpcd /system/bin/adsprpcd
    class main
    user media
    group media
-
-service audiod /system/bin/audiod
-   class late_start
-   user system
-   group system
+   
+#Remove this because no other sound card
+#service audiod /system/bin/audiod
+#   class late_start
+#   user system
+#   group system
 
 service usf_tester /system/bin/usf_tester
     user system
